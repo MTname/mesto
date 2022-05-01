@@ -1,0 +1,9 @@
+.header_gap {
+    margin-bottom: 40px;
+}
+
+@media screen and (max-width: 568px) {
+    .header_gap {
+        margin-bottom: 42px;/**/
+    }
+}
