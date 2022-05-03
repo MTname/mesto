@@ -8,18 +8,18 @@
     <title>Приложение mesto</title>
 </head>
 <body class="page">
-    <header class="header header_gap">
+    <header class="header page_gap_header">
         <div class="header__logo"></div>
     </header>
     <main class="content">
-        <section class="profile profile_gap">
-            <img class="avatar avatar_gap" src="./images/avatar.jpg" alt="Фото аватар">
-            <div class="profile-info">
-                <h1 class="profile-info__name">Жак-Ив Кусто</h1>
-                <button class="profile-info__edit-button" type="button"></button>
-                <p class="profile-info__text">Исследователь океана</p>
+        <section class="profile content_gap_profile">
+            <img class="avatar profile_gap_avatar" src="./images/avatar.jpg" alt="Фото аватар">
+            <div class="profile__info">
+                <h1 class="profile__info_name">Жак-Ив Кусто</h1>
+                <button class="profile__info_edit-button" type="button" aria-label="Кнопка редактирования профиля"></button>
+                <p class="profile__info_text">Исследователь океана</p>
             </div>
-            <button class="add-button" type="button"></button>
+            <button class="profile__add-button" type="button" aria-label="Кнопка добавления фото"></button>
         </section>
         <section class="elements" aria-label="Каталог изображений">
             <article class="element">
@@ -66,7 +66,7 @@
             </article>
         </section>
     </main>
-    <footer class="footer footer_gap">
+    <footer class="footer page_gap_footer">
         <p class="footer__copyright">© 2020 Tuganov M.| Mesto Russia</p>
     </footer>
     <div class="popup">
@@ -76,8 +76,8 @@
             </button>
             <h2 class="popup__title">Редактировать профиль</h2>
             <form class="popup__form" name="form" method="post">
-                <input class="popup__form-name" type="text" name="name" placeholder="Введите имя" autocomplete="off" minlength="3" required>
-                <input class="popup__form-text" type="text" name="text" placeholder="Профессия, интересы" autocomplete="off" minlength="3" required>
+                <input class="popup__form-input popup__form-input_name" type="text" name="name" placeholder="Введите имя" autocomplete="off" minlength="3" required>
+                <input class="popup__form-input popup__form-input_text" type="text" name="text" placeholder="Профессия, интересы" autocomplete="off" minlength="3" required>
                 <button class="popup__save-button" type="submit">Сохранить</button>
             </form>
         </div>

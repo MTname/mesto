@@ -3,10 +3,10 @@
     border: none;
     border-radius: 2px;
     cursor: pointer;
-    width: 83.25%;/*84%;*/
-    /*min-width: 238px;*/
+    width: 83.25%;
+    padding: 0;
     height: 50px;
-    margin: 48px auto 37px/* auto*/;
+    margin: 47px auto 36px;
     font-size: 18px;
     line-height: 1.22; /* 22px; */
     font-style: normal;
@@ -22,7 +22,7 @@
 
 @media screen and (max-width: 450px) {
     .popup__save-button {
-        margin: 45px auto 25px;
+        margin: 45px auto 21px;
         font-size: 14px;
         line-height: 1.21; /* 17px; */
     }

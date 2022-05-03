@@ -1,9 +1,9 @@
-.profile_gap {
+.content_gap_profile {
     margin-bottom: 50px;
 }
 
 @media screen and (max-width: 568px) {
-    .profile_gap {
+    .content_gap_profile {
         margin-bottom: 36px;
     }
 }
