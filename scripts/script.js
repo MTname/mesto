@@ -3,9 +3,9 @@ const popupForm = document.querySelector('.popup__box');
 const inputName = popupForm.querySelector('.popup__form-input_name');
 const inputAboutText = popupForm.querySelector('.popup__form-input_text');
 const popupCloseBtn = document.querySelector('.popup__close-button');
-const popupOpenBtn = document.querySelector('.profile__info_edit-button');
-const profileName = document.querySelector('.profile__info_name');
-const profileAboutText = document.querySelector('.profile__info_text');
+const popupOpenBtn = document.querySelector('.profile__edit-button');
+const profileName = document.querySelector('.profile__name');
+const profileAboutText = document.querySelector('.profile__text');
 
 function popupOpen() {
     popup.classList.add('popup_active');

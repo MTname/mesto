@@ -1,9 +1,9 @@
-.profile_gap_avatar {
+.profile__avatar_gap {
     margin-right: 30px;
 }
 
 @media screen and (max-width: 649px) {
-    .profile_gap_avatar {
+    .profile__avatar_gap {
         margin: 0 0 26px;
     }
 }
