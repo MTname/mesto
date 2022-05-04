@@ -6,3 +6,19 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     color: #000000;
 }
+
+.popup__form-input:first-of-type {
+    margin: 51px auto 0;
+    padding: 0 2px 13px;
+}
+
+@media screen and (max-width: 450px) {
+    .popup__form-input:first-of-type {
+        margin: 75px auto 0;
+    }
+}
+
+.popup__form-input:last-of-type {
+    margin: 27px auto 0;
+    padding: 0 2px 13px;
+}

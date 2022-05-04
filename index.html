@@ -13,7 +13,7 @@
     </header>
     <main class="content">
         <section class="profile content__profile-gap">
-            <img class="profile__avatar profile__avatar_gap" src="./images/avatar.jpg" alt="Фото аватар">
+            <img class="profile__avatar" src="./images/avatar.jpg" alt="Фото аватар">
             <div class="profile__info">
                 <h1 class="profile__name">Жак-Ив Кусто</h1>
                 <button class="profile__edit-button" type="button" aria-label="Кнопка редактирования профиля"></button>
@@ -76,8 +76,8 @@
             </button>
             <h2 class="popup__title">Редактировать профиль</h2>
             <form class="popup__form" name="form" method="post">
-                <input class="popup__form-input popup__form-input_name" type="text" name="name" placeholder="Введите имя" autocomplete="off" minlength="3" required>
-                <input class="popup__form-input popup__form-input_text" type="text" name="text" placeholder="Профессия, интересы" autocomplete="off" minlength="3" required>
+                <input class="popup__form-input popup__form_input_name" type="text" name="name" placeholder="Введите имя" autocomplete="off" minlength="3" required>
+                <input class="popup__form-input popup__form_input_text" type="text" name="text" placeholder="Профессия, интересы" autocomplete="off" minlength="3" required>
                 <button class="popup__save-button" type="submit">Сохранить</button>
             </form>
         </div>
