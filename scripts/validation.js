@@ -7,8 +7,7 @@ const config = {
     errorClass: 'popup__form-input-error_type_active',
 };
 
-const showInputError = (inputConfig) => {
-    const {formElement, inputElement, errorMessage, inputErrorClass, errorClass} = inputConfig;
+const showInputError = (formElement, inputElement, errorMessage, inputErrorClass, errorClass) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
     inputElement.classList.add(inputErrorClass);
     errorElement.textContent = errorMessage;
@@ -25,7 +24,7 @@ const hideInputError = (formElement, inputElement, inputErrorClass, errorClass) 
 const checkInputValidity = (formElement, inputElement, inputErrorClass, errorClass) => {
     if (!inputElement.validity.valid) {
         const errorMessage = inputElement.validationMessage;
-        showInputError({formElement, inputElement, errorMessage, inputErrorClass, errorClass});
+        showInputError(formElement, inputElement, errorMessage, inputErrorClass, errorClass);
     } else {
         hideInputError(formElement, inputElement, inputErrorClass, errorClass);
     }
@@ -69,6 +68,17 @@ const enableValidation = (validCofig) => {
         });
         setEventListeners(formElement, validCofig);
     });
+};
+
+//  очистка ошибок и установка состояния кнопки отправки формы
+const cleanUpForm = (formElement, cleanUpConfig) => {
+    const {inputSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass} = cleanUpConfig;
+    const inputList = Array.from(formElement.querySelectorAll(`.${inputSelector}`));
+    const saveButton = formElement.querySelector(`.${submitButtonSelector}`);
+    inputList.forEach((inputElement) => {
+        hideInputError(formElement, inputElement, inputErrorClass, errorClass);
+    });
+    toggleButtonState(inputList, saveButton, inactiveButtonClass);
 };
 
 enableValidation(config);
