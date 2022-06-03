@@ -27,3 +27,7 @@
         line-height: 1.21; /* 17px; */
     }
 }
+
+.popup__save-button:disabled {
+    cursor: default;
+}
