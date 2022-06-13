@@ -1,7 +1,11 @@
+import { Card } from './Card.js';
+import { initialCards, validationConfig } from './constants.js';
+import FormValidator from './FormValidator.js';
+
 /////////////////////////////////////////////////////////////////////////////////
 //контейнер для карточек и их шаблон
 const elementsContainer = document.querySelector('.elements');
-const templateContent = document.querySelector('.template-item').content;
+const templateContent = document.querySelector('.template-item').content;/**/
 /*********************************************************************/
 //попап создания новой карточки и кнопка его открытия
 const popupNewItemBtn = document.querySelector('.profile__add-button');
@@ -12,7 +16,7 @@ const popupNewItemTitleInput = popupNewItemForm.querySelector('.popup__form-inpu
 const popupNewItemSrcInput = popupNewItemForm.querySelector('.popup__form-input_value_text');
 /*********************************************************************/
 //попап полного открытия фото и кнопка его закрытия
-const popupFullPhoto = document.querySelector('.popup_type_photo');
+export const popupFullPhoto = document.querySelector('.popup_type_photo');
 const popupFullPhotoCloseBtn = popupFullPhoto.querySelector('.popup__close-button');
 const popupFullPhotoItem = popupFullPhoto.querySelector('.popup__image');
 const popupFullPhotoSubtitle = popupFullPhoto.querySelector('.popup__subtitle');
@@ -32,16 +36,6 @@ const profileName = document.querySelector('.profile__name');
 const profileAboutText = document.querySelector('.profile__text');
 
 /////////////////////////////////////////////////////////////////////////////////
-//обработчик лайка
-function handleElementLikeBtn(evt) {
-  evt.target.classList.toggle('element__like_active');
-}
-/*********************************************************************/
-//обработчик кнопки удаления карточки
-function handleElementDeleteBtn(evt) {
-  evt.target.closest('.element').remove();
-}
-/*********************************************************************/
 //закрытие любого попапа клавишей ESC
 function handleEscClose(event) {
   if (event.key === 'Escape') {
@@ -59,7 +53,7 @@ function handleOverlayClose(event) {
 }
 /*********************************************************************/
 //открытие и закрытие любого попапа
-function openPopup(popupAny) {
+export function openPopup(popupAny) {
   document.addEventListener('keydown', handleEscClose);
   popupAny.addEventListener('click', handleOverlayClose);
   popupAny.classList.add('popup_active');
@@ -70,44 +64,24 @@ function closePopup(popupAny) {
   popupAny.removeEventListener('click', handleOverlayClose);
 }
 /*********************************************************************/
-//открытие попапа ПОЛНОГО ОТКРЫТИЯ фото
-function handleImageClick({name, link}) {
-  popupFullPhotoItem.src = link;
-  popupFullPhotoItem.alt = name;
-  popupFullPhotoSubtitle.textContent = name;
-  openPopup(popupFullPhoto);
-}
-/*********************************************************************/
-//создание карточки по шаблону
-function createElement({name, link}) {
-  const element = templateContent.querySelector('.element').cloneNode(true);
-  const elementPhoto = element.querySelector('.element__image');
-  const elementTitle = element.querySelector('.element__title');
-  const elementDeleteBtn = element.querySelector('.element__delete');
-  const elementLikeBtn = element.querySelector('.element__like');
-  elementTitle.textContent = name;
-  elementPhoto.src = link;
-  elementPhoto.alt = name;
-  elementDeleteBtn.addEventListener('click', handleElementDeleteBtn);
-  elementLikeBtn.addEventListener('click', handleElementLikeBtn);
-  elementPhoto.addEventListener('click', () => handleImageClick({name, link}));  
-  return element;
-}
-/*********************************************************************/
 //размещение карточки (из массива данных / и новой) в контейнер для карточек
-function renderElement(elementItem) {
-  elementsContainer.prepend(createElement(elementItem));
+function renderElement(card) {
+  elementsContainer.prepend(card);
 }
 /*********************************************************************/
 //создание карточек по шаблону из массива данных
 initialCards.reverse().forEach(function(item) {
-  renderElement(item);
+  const card = new Card(item.name, item.link, '.template-item');
+  const cardElement = card.createElement();
+  renderElement(cardElement);
 });
 /*********************************************************************/
 //отправка формы добавления карточки пользователя
 function handleNewItemSubmit(evt) {
+  const card = new Card(popupNewItemTitleInput.value, popupNewItemSrcInput.value, '.template-item');
+  const cardElement = card.createElement();
   evt.preventDefault();
-  renderElement({name: popupNewItemTitleInput.value, link: popupNewItemSrcInput.value});
+  renderElement(cardElement);
   closePopup(popupNewItem);
 }
 /*********************************************************************/
@@ -119,12 +93,18 @@ function handleProfileSubmit(evt) {
   closePopup(popupProfile);
 }
 /*********************************************************************/
+//валидация форм
+const FormValidators = {};
+Array.from(document.forms).forEach((formElement) => {
+  FormValidators[formElement.name] = new FormValidator(validationConfig, formElement);
+  FormValidators[formElement.name].enableValidation();
+});
 
 /////////////////////////////////////////////////////////////////////////////////
 //слушатель ОТКРЫТИЯ попапа добавления карточки пользователя
 popupNewItemBtn.addEventListener('click', function() {
   popupNewItemForm.reset();
-  cleanUpForm(popupNewItemForm, config);
+  FormValidators[popupNewItemForm.name].cleanUpForm();
   openPopup(popupNewItem);
 });
 //слушатель ЗАКРЫТИЯ попапа добавления карточки пользователя
@@ -134,7 +114,7 @@ popupNewItemCloseBtn.addEventListener ('click', function() {
 //слушатель добавления карточки пользователя
 popupNewItemForm.addEventListener('submit', handleNewItemSubmit);
 /*********************************************************************/
-//слушатель ЗАКРЫТИЯ попапа ПОЛНОГО ОТКРЫТИЯ фото
+//слушатель закрытия попапа расширенного фото
 popupFullPhotoCloseBtn.addEventListener('click', function() {
   closePopup(popupFullPhoto);
 });
@@ -143,7 +123,7 @@ popupFullPhotoCloseBtn.addEventListener('click', function() {
 popupProfileEditBtn.addEventListener('click', function() {
   popupProfileNameInput.value = profileName.textContent;
   popupProfileAboutTextInput.value = profileAboutText.textContent;
-  cleanUpForm(popupProfileForm, config);
+  FormValidators[popupProfileForm.name].cleanUpForm();
   openPopup(popupProfile);
 });
 // слушатель закрытия попапа редактирования профиля

@@ -32,7 +32,7 @@
                 <img class="popup__close-icon" src="./images/cross-button_big.svg" alt="Кнопка закрытия попапа">
             </button>
             <h2 class="popup__title">Редактировать профиль</h2>
-            <form class="popup__form" name="form" method="post" novalidate>
+            <form class="popup__form" name="form-profile" method="post" novalidate>
                 <input class="popup__form-input popup__form-input_value_name" id="name-input" type="text" name="name" placeholder="Введите имя" autocomplete="off" minlength="2" maxlength="40" required>
                 <span class="popup__form-input-error name-input-error"></span>
                 <input class="popup__form-input popup__form-input_value_text" id="about-input" type="text" name="text" placeholder="Профессия, интересы" autocomplete="off" minlength="2" maxlength="200" required>
@@ -47,7 +47,7 @@
                 <img class="popup__close-icon" src="./images/cross-button_big.svg" alt="Кнопка закрытия попапа">
             </button>
             <h2 class="popup__title">Новое место</h2>
-            <form class="popup__form" name="form" method="post" novalidate>
+            <form class="popup__form" name="form-newCard" method="post" novalidate>
                 <input class="popup__form-input popup__form-input_value_name" id="place-input" type="text" name="name" placeholder="Название" autocomplete="off" minlength="2" maxlength="30" required>
                 <span class="popup__form-input-error place-input-error"></span>
                 <input class="popup__form-input popup__form-input_value_text" id="url-input" type="url" name="text" placeholder="Путь файла фото" autocomplete="off" minlength="2" required>
@@ -75,8 +75,6 @@
             <button class="element__delete" type="button"></button>
         </article>
     </template>
-    <script src="./scripts/cards.js"></script>
-    <script src="./scripts/validation.js"></script>
-    <script src="./scripts/script.js"></script>
+    <script type="module" src="./scripts/index.js"></script>
 </body>
 </html>
