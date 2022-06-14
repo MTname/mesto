@@ -20,7 +20,7 @@ export class Card {
   }
   
   _handleElementDeleteBtn() {
-    this._element.remove(); // this._element.querySelector('.element__delete').closest('.element').remove();
+    this._element.remove();
   }
   
   _handleImageClick() {
@@ -34,16 +34,6 @@ export class Card {
     this._element.querySelector('.element__delete').addEventListener('click', () => this._handleElementDeleteBtn());
     this._element.querySelector('.element__like').addEventListener('click', () => this._handleElementLikeBtn());
     this._element.querySelector('.element__image').addEventListener('click', () => this._handleImageClick());
-    
-    /*this._element.querySelector('.element__delete').addEventListener('click', () => {
-      this._handleElementDeleteBtn();
-    });
-    this._element.querySelector('.element__like').addEventListener('click', () => {
-      this._handleElementLikeBtn();
-    });
-    this._element.querySelector('.element__image').addEventListener('click', () => {
-      this._handleImageClick();
-    });*/
   }
   
   createElement() {

@@ -18,11 +18,10 @@ const popupNewItemSrcInput = popupNewItemForm.querySelector('.popup__form-input_
 //попап полного открытия фото и кнопка его закрытия
 export const popupFullPhoto = document.querySelector('.popup_type_photo');
 const popupFullPhotoCloseBtn = popupFullPhoto.querySelector('.popup__close-button');
-const popupFullPhotoItem = popupFullPhoto.querySelector('.popup__image');
-const popupFullPhotoSubtitle = popupFullPhoto.querySelector('.popup__subtitle');
+const popupFullPhotoItem = popupFullPhoto.querySelector('.popup__image');/**/
+const popupFullPhotoSubtitle = popupFullPhoto.querySelector('.popup__subtitle');/**/
 /*********************************************************************/
-//любой попап (для общей функции) и их общий массив
-/*const popupAny = document.querySelector('.popup');*/
+//массив всех попапов
 const popupAnyArray = Array.from(document.querySelectorAll('.popup'));
 /*********************************************************************/
 //попап редактирования профиля и кнопка его открытия
@@ -94,36 +93,18 @@ function handleProfileSubmit(evt) {
 }
 /*********************************************************************/
 //валидация форм
-const FormValidators = {};
+const formValidators = {};
 Array.from(document.forms).forEach((formElement) => {
-  FormValidators[formElement.name] = new FormValidator(validationConfig, formElement);
-  FormValidators[formElement.name].enableValidation();
+  formValidators[formElement.name] = new FormValidator(validationConfig, formElement);
+  formValidators[formElement.name].enableValidation();
 });
 
 /////////////////////////////////////////////////////////////////////////////////
-//слушатель ОТКРЫТИЯ попапа добавления карточки пользователя
-popupNewItemBtn.addEventListener('click', function() {
-  popupNewItemForm.reset();
-  FormValidators[popupNewItemForm.name].cleanUpForm();
-  openPopup(popupNewItem);
-});
-//слушатель ЗАКРЫТИЯ попапа добавления карточки пользователя
-popupNewItemCloseBtn.addEventListener ('click', function() {
-  closePopup(popupNewItem);
-});
-//слушатель добавления карточки пользователя
-popupNewItemForm.addEventListener('submit', handleNewItemSubmit);
-/*********************************************************************/
-//слушатель закрытия попапа расширенного фото
-popupFullPhotoCloseBtn.addEventListener('click', function() {
-  closePopup(popupFullPhoto);
-});
-/*********************************************************************/
 //слушатель открытия попапа редактирования профиля
 popupProfileEditBtn.addEventListener('click', function() {
   popupProfileNameInput.value = profileName.textContent;
   popupProfileAboutTextInput.value = profileAboutText.textContent;
-  FormValidators[popupProfileForm.name].cleanUpForm();
+  formValidators[popupProfileForm.name].cleanUpForm();
   openPopup(popupProfile);
 });
 // слушатель закрытия попапа редактирования профиля
@@ -132,3 +113,21 @@ popupProfileCloseBtn.addEventListener('click', function() {
 });
 //слушатель редактирования профиля
 popupProfileForm.addEventListener('submit', handleProfileSubmit);
+/*********************************************************************/
+//слушатель закрытия попапа расширенного фото
+popupFullPhotoCloseBtn.addEventListener('click', function() {
+  closePopup(popupFullPhoto);
+});
+/*********************************************************************/
+//слушатель ОТКРЫТИЯ попапа добавления карточки пользователя
+popupNewItemBtn.addEventListener('click', function() {
+  popupNewItemForm.reset();
+  formValidators[popupNewItemForm.name].cleanUpForm();
+  openPopup(popupNewItem);
+});
+//слушатель ЗАКРЫТИЯ попапа добавления карточки пользователя
+popupNewItemCloseBtn.addEventListener ('click', function() {
+  closePopup(popupNewItem);
+});
+//слушатель добавления карточки пользователя
+popupNewItemForm.addEventListener('submit', handleNewItemSubmit);
