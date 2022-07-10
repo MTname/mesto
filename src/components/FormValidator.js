@@ -1,4 +1,4 @@
-class FormValidator {
+export default class FormValidator {
     constructor(config, form) {
         this._inputSelector = config.inputSelector;
         this._submitButtonSelector = config.submitButtonSelector;
@@ -59,14 +59,10 @@ class FormValidator {
         this._toggleButtonState(inputList, saveButton);
     }
     
-    cleanUpForm() {
+    cleanUpForm = () => {
         const inputList = Array.from(this._form.querySelectorAll(`.${this._inputSelector}`));
         const saveButton = this._form.querySelector(`.${this._submitButtonSelector}`);
-        inputList.forEach((inputElement) => {
-            this._hideInputError(inputElement);
-        });
+        inputList.forEach((inputElement) => this._hideInputError(inputElement));
         this._toggleButtonState(inputList, saveButton);
     }
 }
-
-export default FormValidator;
