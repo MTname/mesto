@@ -6,6 +6,8 @@ export default class FormValidator {
         this._inputErrorClass = config.inputErrorClass;
         this._errorClass = config.errorClass;
         this._form = form;
+        this._inputList = Array.from(this._form.querySelectorAll(`.${this._inputSelector}`));
+        this._saveButton = this._form.querySelector(`.${this._submitButtonSelector}`);
     }
     
     _showInputError(inputElement, errorMessage) {
@@ -48,21 +50,17 @@ export default class FormValidator {
     }
     
     enableValidation() {
-        const inputList = Array.from(this._form.querySelectorAll(`.${this._inputSelector}`));
-        const saveButton = this._form.querySelector(`.${this._submitButtonSelector}`);
-        inputList.forEach((inputElement) => {
+        this._inputList.forEach((inputElement) => {
             inputElement.addEventListener("input", () => {
                 this._checkInputValidity(inputElement);
-                this._toggleButtonState(inputList, saveButton);
+                this._toggleButtonState(this._inputList, this._saveButton);
             });
         });
-        this._toggleButtonState(inputList, saveButton);
+        this._toggleButtonState(this._inputList, this._saveButton);
     }
     
     cleanUpForm = () => {
-        const inputList = Array.from(this._form.querySelectorAll(`.${this._inputSelector}`));
-        const saveButton = this._form.querySelector(`.${this._submitButtonSelector}`);
-        inputList.forEach((inputElement) => this._hideInputError(inputElement));
-        this._toggleButtonState(inputList, saveButton);
+        this._inputList.forEach((inputElement) => this._hideInputError(inputElement));
+        this._toggleButtonState(this._inputList, this._saveButton);
     }
 }

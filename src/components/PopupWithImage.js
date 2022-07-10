@@ -10,8 +10,8 @@ export default class PopupWithImage extends Popup {
         
         this._imageSelector = imageSelector;
         this._subtitleSelector = subtitleSelector;
-        this._imageElement = document.querySelector(`.${this._imageSelector}`);
-        this._subtitleElement = document.querySelector(`.${this._subtitleSelector}`);
+        this._imageElement = this._popup.querySelector(`.${this._imageSelector}`);
+        this._subtitleElement = this._popup.querySelector(`.${this._subtitleSelector}`);
         this.open = this.open.bind(this);
     }
 

@@ -41,8 +41,6 @@ export default class PopupWithForm extends Popup {
     open() {
         if (this._getterCallBack) {
             this._setInputValues(this._getterCallBack());
-        } else {
-            this._formElement.reset();
         }
         this._cleanUpFormErrors();
         super.open();
