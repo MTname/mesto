@@ -7,29 +7,27 @@ export default class Api {
             'Content-Type': 'application/json' 
         }
     }
+
+    _handleResJson(res) {
+        if (res.ok) {
+            return res.json();
+        }
+        return Promise.reject(`Возникла ошибка: ${res.status}`); // если ошибка, отклоняем промис
+    }
+    
     
     getCards() {
         return fetch(`${this._url}/cards`, {
             headers: this._headers
         })
-        .then(res => {
-            if (res.ok) {
-                return res.json();
-            }
-            return Promise.reject(`Возникла ошибка: ${res.status}`); // если ошибка, отклоняем промис
-        });
+        .then(this._handleResJson);
     }
 
     getUser() {
         return fetch(`${this._url}/users/me`, {
             headers: this._headers
         })
-        .then(res => {
-            if (res.ok) {
-                return res.json();
-            }
-            return Promise.reject(`Возникла ошибка: ${res.status}`);
-        });
+        .then(this._handleResJson);
     }
     
     editUserInfo(title, job) {
@@ -42,12 +40,7 @@ export default class Api {
             method: 'PATCH',
             body: JSON.stringify(body),
         })
-        .then(res => {
-            if (res.ok) {
-                return res.json();
-            }
-            return Promise.reject(`Возникла ошибка: ${res.status}`);
-        });
+        .then(this._handleResJson);
     }
 
     addCard(newPlace, linkPlace) {
@@ -60,12 +53,7 @@ export default class Api {
             method: 'POST',
             body: JSON.stringify(body),
         })
-        .then(res => {
-            if (res.ok) {
-                return res.json();
-            }
-            return Promise.reject(`Возникла ошибка: ${res.status}`);
-        });
+        .then(this._handleResJson);
     }
 
     deleteCard(cardId) {
@@ -73,24 +61,14 @@ export default class Api {
             headers: this._headers,
             method: 'DELETE',
         })
-        .then(res => {
-            if (res.ok) {
-                return res.json();
-            }
-            return Promise.reject(`Возникла ошибка: ${res.status}`);
-         });
+        .then(this._handleResJson);
     }
 
     countLikes() {
         return fetch(`${this._url}/cards/${cardId}/likes`, {
             headers: this._headers,
         })
-        .then(res => {
-            if (res.ok) {
-                return res.json();
-            }
-            return Promise.reject(`Возникла ошибка: ${res.status}`);
-        });
+        .then(this._handleResJson);
     }
 
     switchLike(cardId, isLiked) {
@@ -98,12 +76,7 @@ export default class Api {
             headers: this._headers,
             method: isLiked ? 'DELETE' : 'PUT',
         })
-        .then(res => {
-            if (res.ok) {
-                return res.json();
-            }
-            return Promise.reject(`Возникла ошибка: ${res.status}`);
-        });
+        .then(this._handleResJson);
     }
     
     editAvatar(userAvatar) {

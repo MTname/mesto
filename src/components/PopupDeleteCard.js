@@ -25,11 +25,7 @@ export default class PopupDeleteCard extends Popup {
         this._removeCardCallBack = removeCardCallBack;
         super.open();
     }
-
-    close() {
-        super.close();
-    }
-
+    
     changeButtonText = (isSaving) => {
         this._submitBtn.textContent = isSaving ? this._changeBtnText : this._btnText;
     }
