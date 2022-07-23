@@ -1,10 +1,10 @@
 export default class Popup {
     constructor(popupSelector, popupConfig) {
         this._popupSelector = popupSelector;
-        this._activeModifier = popupConfig.activeModifier; // '.popup_active'
+        this._activeModifier = popupConfig.activeModifier; // 'popup_active'
         this._closeBtnSelector = popupConfig.closeBtnSelector; // '.popup__close-button'
-        this._popup = document.querySelector(`.${this._popupSelector}`);
-        this._closeBtn = this._popup.querySelector(`.${this._closeBtnSelector}`);
+        this._popup = document.querySelector(this._popupSelector);
+        this._closeBtn = this._popup.querySelector(this._closeBtnSelector);
     }
     
     open() {
