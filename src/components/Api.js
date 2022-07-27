@@ -1,7 +1,6 @@
 export default class Api {
-    constructor(url, token) {
+    constructor(url) {
         this._url = url;
-        this._token = token;
         this._headers = {
             authorization: '0b7fb7af-1d7f-4272-ab93-c41201325a22',
             'Content-Type': 'application/json' 
@@ -14,7 +13,6 @@ export default class Api {
         }
         return Promise.reject(`Возникла ошибка: ${res.status}`); // если ошибка, отклоняем промис
     }
-    
     
     getCards() {
         return fetch(`${this._url}/cards`, {
